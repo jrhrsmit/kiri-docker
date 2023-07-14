@@ -1,18 +1,19 @@
 
 dockerfile = Dockerfile
 
-docker_username = leoheck
+docker_username = jrhrsmit
 docker_repo = kiri
 docker_tagname = latest
 
 docker_build: $(dockerfile)
-	time docker build \
+	docker build \
 		-f $(dockerfile) \
+		--build-arg BUILD_DATE=$(date +%s) \
 		--tag $(docker_username)/$(docker_repo):$(docker_tagname) .
 	docker images
 
 docker_build_no_cache: $(dockerfile)
-	time docker build \
+	docker build \
 		-f $(dockerfile) \
 		--no-cache \
 		--tag $(docker_username)/$(docker_repo):$(docker_tagname) .
