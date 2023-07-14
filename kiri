@@ -14,7 +14,7 @@ show_help()
 	    -h|--help            Show version
 	    -v|--version         Show version
 	    -d|--dont-run        Do not run kiri
-	    -i|--docker-img IMG  Set docker image, default is leoheck/kiri:tag
+	    -i|--docker-img IMG  Set docker image, default is jrhrsmit/kiri:tag
 	    -c|--cmd CMD         Run a command given by a string
 	    -k|--kiri ARGS       Pass a string with arguments to Kiri
 
@@ -108,7 +108,7 @@ command_line_parse()
 				;;
 
 			*)
-				repo_path="${1}"
+				repo_path="$(realpath ${1})"
 				shift
 				;;
 		esac
@@ -128,7 +128,7 @@ main()
 	docker_repo_path="/home/kiri/${repo_dir}"
 
 	if [[ -z "${docker_image}" ]]; then
-		container_img="leoheck/kiri"
+		container_img="jrhrsmit/kiri"
 	else
 		container_img="${docker_image}"
 	fi
